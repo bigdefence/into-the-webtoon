@@ -78,7 +78,7 @@ def main():
             out = to_pil_image(out)
         with st.spinner('AI가 당신의 사진을 웹툰 스타일로 변환하고 있습니다...'):
             time.sleep(3)
-            st.success('당신의 사진을 만화화를 완료했습니다!')
+            st.success('사진을 웹툰 스타일로 변환을 완료했습니다!')
         st.image(out,use_column_width=True)
     col1, col2 = st.columns(2)
     with col1:
