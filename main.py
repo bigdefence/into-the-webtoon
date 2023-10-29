@@ -34,7 +34,7 @@ coupang_ad_code="""
 <iframe src="https://ads-partners.coupang.com/widgets.html?id=718831&template=carousel&trackingCode=AF3660738&subId=&width=680&height=140&tsource=" width="680" height="140" frameborder="0" scrolling="no" referrerpolicy="unsafe-url"></iframe>
 <style>margin: 0 auto;</style>
 """
-device = 'cuda:0'
+device = 'cpu'
     
 net = Generator()
 net.load_state_dict(torch.load('./weights/face_paint_512_v2.pt', map_location="cpu"))
@@ -47,7 +47,7 @@ def resize_image(image, max_file_size=1e6):
     # 이미지 파일이 1MB보다 큰 경우에만 리사이징 수행
     if file_size >= max_file_size:
         # 원하는 최대 해상도 설정
-        image.thumbnail((1000,1400))
+        image.thumbnail((1000,1300))
     
     return image
 def main():
