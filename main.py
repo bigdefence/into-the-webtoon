@@ -8,9 +8,9 @@ import torch
 from torchvision.transforms.functional import to_tensor, to_pil_image
 
 from model import Generator
-torch.backends.cudnn.enabled = False
-torch.backends.cudnn.benchmark = False
-torch.backends.cudnn.deterministic = True
+# torch.backends.cudnn.enabled = False
+# torch.backends.cudnn.benchmark = False
+# torch.backends.cudnn.deterministic = True
 
 st.set_page_config(
     page_title="웹툰속으로",
@@ -39,16 +39,7 @@ device = 'cpu'
 net = Generator()
 net.load_state_dict(torch.load('./weights/face_paint_512_v2.pt', map_location="cpu"))
 net.to(device).eval()
-def load_image(image_path, x32=False):
-    img = Image.open(image_path).convert("RGB")
 
-    if x32:
-        def to_32s(x):
-            return 256 if x < 256 else x - x % 32
-        w, h = img.size
-        img = img.resize((to_32s(w), to_32s(h)))
-
-    return img
 def test(args):                  
         with torch.no_grad():
             image = to_tensor(image).unsqueeze(0) * 2 - 1
@@ -69,7 +60,7 @@ def main():
     uploaded_file = st.file_uploader("PNG 또는 JPG 이미지를 업로드하세요.", type=["png", "jpg", "jpeg"])
     if uploaded_file is not None:
         # 이미지를 넘파이 배열로 변환
-        image = load_image(uploaded_file)
+        image = Image.open(uploaded_file).convert("RGB")
         image = ImageOps.exif_transpose(image)
         with torch.no_grad():
             image = to_tensor(image).unsqueeze(0) * 2 - 1
