@@ -47,7 +47,7 @@ def resize_image(image, max_file_size=1e6):
     # 이미지 파일이 1MB보다 큰 경우에만 리사이징 수행
     if file_size >= max_file_size:
         # 원하는 최대 해상도 설정
-        image.thumbnail((1080,1440))
+        image.thumbnail((1000,1000))
     
     return image
 def main():
@@ -65,15 +65,15 @@ def main():
         image = ImageOps.exif_transpose(image)
         image = resize_image(image)
         st.write(image.size)
-        # with torch.no_grad():
-        #     image = to_tensor(image).unsqueeze(0) * 2 - 1
-        #     out = net(image.to(device), False).cpu()
-        #     out = out.squeeze(0).clip(-1, 1) * 0.5 + 0.5
-        #     out = to_pil_image(out)
+        with torch.no_grad():
+            image = to_tensor(image).unsqueeze(0) * 2 - 1
+            out = net(image.to(device), False).cpu()
+            out = out.squeeze(0).clip(-1, 1) * 0.5 + 0.5
+            out = to_pil_image(out)
         with st.spinner('AI가 당신의 사진을 웹툰 스타일로 변환하고 있습니다...'):
             time.sleep(3)
             st.success('사진을 웹툰 스타일로 변환을 완료했습니다!')
-        st.image(image,use_column_width=True)
+        st.image(out,use_column_width=True)
     col1, col2 = st.columns(2)
     with col1:
         st.components.v1.html(f"<center>{kakao_ad_code1}</center>", height=250, scrolling=False)
