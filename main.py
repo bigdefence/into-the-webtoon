@@ -47,7 +47,7 @@ def resize_image(image, max_file_size=1e6):
     # 이미지 파일이 1MB보다 큰 경우에만 리사이징 수행
     if file_size >= max_file_size:
         # 원하는 최대 해상도 설정
-        image.thumbnail((1000,1000))
+        image.thumbnail((1000,1400))
     
     return image
 def main():
@@ -59,6 +59,7 @@ def main():
     st.write(':blue[얼굴 사진을 업로드 해주세요! 사진은 저장되지 않습니다!]')
     # 파일 업로드 컴포넌트
     uploaded_file = st.file_uploader("PNG 또는 JPG 이미지를 업로드하세요.", type=["png", "jpg", "jpeg"])
+    print("uploaded!")
     if uploaded_file is not None:
         # 이미지를 넘파이 배열로 변환
         image = Image.open(uploaded_file).convert("RGB")
