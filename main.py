@@ -13,7 +13,7 @@ torch.backends.cudnn.benchmark = False
 torch.backends.cudnn.deterministic = True
 
 st.set_page_config(
-    page_title="나의 만화상은?",
+    page_title="웹툰속으로",
     page_icon="face_favicon.png",
 )
 kakao_ad_code1 = """
@@ -34,7 +34,7 @@ coupang_ad_code="""
 <iframe src="https://ads-partners.coupang.com/widgets.html?id=718831&template=carousel&trackingCode=AF3660738&subId=&width=680&height=140&tsource=" width="680" height="140" frameborder="0" scrolling="no" referrerpolicy="unsafe-url"></iframe>
 <style>margin: 0 auto;</style>
 """
-device = 'cpu'
+device = 'cuda:0'
     
 net = Generator()
 net.load_state_dict(torch.load('./weights/face_paint_512_v2.pt', map_location="cpu"))
@@ -60,11 +60,11 @@ def test(args):
         print(f"image saved: {image_name}")
 def main():
     
-    st.title("_나의 만화상은_?:cupid:")
+    st.title("_웹툰속으로_?:cupid:")
     
     # 파일 업로드 섹션 디자인
-    st.subheader('인공지능이 당신의 얼굴을 그려줄거에요!:sunglasses:')
-    st.write(':blue[얼굴 정면 사진을 업로드 해주세요! 사진은 저장되지 않습니다!]')
+    st.subheader('웹툰속으로에서는 단순한 클릭 한 번으로 당신의 사진을 독특하고 재미있는 웹툰 스타일로 변환해드립니다!:sunglasses:')
+    st.write(':blue[사진은 저장되지 않습니다!]')
     # 파일 업로드 컴포넌트
     uploaded_file = st.file_uploader("PNG 또는 JPG 이미지를 업로드하세요.", type=["png", "jpg", "jpeg"])
     if uploaded_file is not None:
@@ -76,9 +76,9 @@ def main():
             out = net(image.to(device), False).cpu()
             out = out.squeeze(0).clip(-1, 1) * 0.5 + 0.5
             out = to_pil_image(out)
-        with st.spinner('AI가 당신의 사진을 만화화 하고있습니다...'):
+        with st.spinner('AI가 당신의 사진을 웹툰 스타일로 변환하고 있습니다...'):
             time.sleep(3)
-            st.success('당신의 사진을 만화화를 완료 했습니다!')
+            st.success('당신의 사진을 만화화를 완료했습니다!')
         st.image(out,use_column_width=True)
     col1, col2 = st.columns(2)
     with col1:
