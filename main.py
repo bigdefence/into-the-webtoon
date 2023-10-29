@@ -64,11 +64,12 @@ def main():
         image = Image.open(uploaded_file).convert("RGB")
         image = ImageOps.exif_transpose(image)
         image = resize_image(image)
-        with torch.no_grad():
-            image = to_tensor(image).unsqueeze(0) * 2 - 1
-            out = net(image.to(device), False).cpu()
-            out = out.squeeze(0).clip(-1, 1) * 0.5 + 0.5
-            out = to_pil_image(out)
+        st.write(image.size)
+        # with torch.no_grad():
+        #     image = to_tensor(image).unsqueeze(0) * 2 - 1
+        #     out = net(image.to(device), False).cpu()
+        #     out = out.squeeze(0).clip(-1, 1) * 0.5 + 0.5
+        #     out = to_pil_image(out)
         with st.spinner('AI가 당신의 사진을 웹툰 스타일로 변환하고 있습니다...'):
             time.sleep(3)
             st.success('사진을 웹툰 스타일로 변환을 완료했습니다!')
