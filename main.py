@@ -34,7 +34,7 @@ coupang_ad_code="""
 <iframe src="https://ads-partners.coupang.com/widgets.html?id=718831&template=carousel&trackingCode=AF3660738&subId=&width=680&height=140&tsource=" width="680" height="140" frameborder="0" scrolling="no" referrerpolicy="unsafe-url"></iframe>
 <style>margin: 0 auto;</style>
 """
-device = 'cpu'
+device = 'cuda:0'
     
 net = Generator()
 net.load_state_dict(torch.load('./weights/face_paint_512_v2.pt', map_location="cpu"))
