@@ -60,7 +60,7 @@ def test(args):
         print(f"image saved: {image_name}")
 def main():
     
-    st.title("_웹툰속으로_?:cupid:")
+    st.title("_웹툰속으로_:cupid:")
     
     # 파일 업로드 섹션 디자인
     st.subheader('웹툰속으로에서는 단순한 클릭 한 번으로 당신의 사진을 독특하고 재미있는 웹툰 스타일로 변환해드립니다!:sunglasses:')
