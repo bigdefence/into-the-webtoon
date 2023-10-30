@@ -13,7 +13,7 @@ from model import Generator
 # torch.backends.cudnn.deterministic = True
 
 st.set_page_config(
-    page_title="웹툰속으로",
+    page_title="웹툰 속으로",
     page_icon="webtoon.png",
 )
 kakao_ad_code1 = """
@@ -50,7 +50,7 @@ def resize_image(image, max_file_size=1e6):
     # 이미지 파일이 1MB보다 큰 경우에만 리사이징 수행
     if file_size >= max_file_size:
         # 원하는 최대 해상도 설정
-        image.thumbnail((900,1200))
+        image.thumbnail((1000,1200))
     with torch.no_grad():
             image = to_tensor(image).unsqueeze(0) * 2 - 1
             out = net(image.to(device), False).cpu()
