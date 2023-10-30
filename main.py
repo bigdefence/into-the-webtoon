@@ -40,6 +40,7 @@ def model_load():
     net = Generator()
     net.load_state_dict(torch.load('./weights/face_paint_512_v2.pt', map_location="cpu"))
     net.to(device).eval()
+    return net
 def resize_image(image, max_file_size=1e6):
     # 이미지 파일 크기 확인
     image_size = image.size
@@ -58,7 +59,7 @@ def main():
     # 파일 업로드 섹션 디자인
     st.subheader('웹툰속으로에서는 단순한 클릭 한 번으로 당신의 사진을 독특하고 재미있는 웹툰 스타일로 변환해드립니다!:sunglasses:')
     st.write(':blue[얼굴 사진을 업로드 해주세요! 사진은 저장되지 않습니다!]')
-    model_load()
+    net=model_load()
     # 파일 업로드 컴포넌트
     uploaded_file = st.file_uploader("PNG 또는 JPG 이미지를 업로드하세요.", type=["png", "jpg", "jpeg"])
     print("uploaded!")
