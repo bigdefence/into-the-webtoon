@@ -42,8 +42,9 @@ def model_load():
     net.to(device).eval()
     return net
 @st.cache_data
-def resize_image(image, max_file_size=1e6,net):
+def resize_image(image,net):
     # 이미지 파일 크기 확인
+    max_file_size=1e6
     image_size = image.size
     file_size = image_size[0] * image_size[1]
     
