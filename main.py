@@ -47,7 +47,7 @@ def resize_image(image, max_file_size=1e6):
     # 이미지 파일이 1MB보다 큰 경우에만 리사이징 수행
     if file_size >= max_file_size:
         # 원하는 최대 해상도 설정
-        image.thumbnail((1000,1300))
+        image.thumbnail((1000,1200))
     
     return image
 def main():
