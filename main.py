@@ -35,7 +35,7 @@ coupang_ad_code="""
 <style>margin: 0 auto;</style>
 """
 device = 'cpu'
-@st.cache_data
+@st.cache_resource
 def model_load():
     net = Generator()
     net.load_state_dict(torch.load('./weights/face_paint_512_v2.pt', map_location="cpu"))
