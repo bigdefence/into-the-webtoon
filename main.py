@@ -42,8 +42,9 @@ def model_load():
     net.to(device).eval()
     return net
 @st.cache_data
-def resize_image(image,net):
+def resize_image(image):
     # 이미지 파일 크기 확인
+    net=model_load()
     max_file_size=1e6
     image_size = image.size
     file_size = image_size[0] * image_size[1]
@@ -65,7 +66,6 @@ def main():
     # 파일 업로드 섹션 디자인
     st.subheader('웹툰 속으로에서는 단순한 클릭 한 번으로 당신의 사진을 독특하고 재미있는 웹툰 스타일로 변환해드립니다!:sunglasses:')
     st.write(':blue[얼굴 사진을 업로드 해주세요! 사진은 저장되지 않습니다!]')
-    net=model_load()
     # 파일 업로드 컴포넌트
     uploaded_file = st.file_uploader("PNG 또는 JPG 이미지를 업로드하세요.", type=["png", "jpg", "jpeg"])
     print("uploaded!")
@@ -73,7 +73,7 @@ def main():
         # 이미지를 넘파이 배열로 변환
         image = Image.open(uploaded_file).convert("RGB")
         image = ImageOps.exif_transpose(image)
-        out = resize_image(image,net)
+        out = resize_image(image)
         st.write(out.size)
         # with torch.no_grad():
         #     image = to_tensor(image).unsqueeze(0) * 2 - 1
