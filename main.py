@@ -13,7 +13,7 @@ from model import Generator
 # torch.backends.cudnn.deterministic = True
 
 st.set_page_config(
-    page_title="웹툰 속으로",
+    page_title="웹툰속으로",
     page_icon="webtoon.png",
 )
 kakao_ad_code1 = """
