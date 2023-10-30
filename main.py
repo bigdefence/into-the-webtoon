@@ -13,7 +13,7 @@ from model import Generator
 # torch.backends.cudnn.deterministic = True
 
 st.set_page_config(
-    page_title="웹툰속으로",
+    page_title="웹툰 속으로",
     page_icon="webtoon.png",
 )
 kakao_ad_code1 = """
@@ -42,7 +42,7 @@ def model_load():
     net.to(device).eval()
     return net
 @st.cache_data
-def resize_image(image, max_file_size=1e6):
+def resize_image(image, max_file_size=1e6,net):
     # 이미지 파일 크기 확인
     image_size = image.size
     file_size = image_size[0] * image_size[1]
@@ -72,7 +72,7 @@ def main():
         # 이미지를 넘파이 배열로 변환
         image = Image.open(uploaded_file).convert("RGB")
         image = ImageOps.exif_transpose(image)
-        out = resize_image(image)
+        out = resize_image(image,net)
         st.write(out.size)
         # with torch.no_grad():
         #     image = to_tensor(image).unsqueeze(0) * 2 - 1
