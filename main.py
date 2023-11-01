@@ -59,13 +59,23 @@ def resize_image(image):
             out = out.squeeze(0).clip(-1, 1) * 0.5 + 0.5
             out = to_pil_image(out)
     return out
+st.markdown("""
+    <link href='https://fonts.googleapis.com/css2?family=Cute+Font&display=swap' rel='stylesheet'>
+    """,unsafe_allow_html=True)
+st.markdown("""
+    <style>
+    .fonts {
+        font-family: 'Cute Font', cursive;
+    }
+    </style>
+    """,unsafe_allow_html=True)
 def main():
     
     st.title("_웹툰 속으로_:cupid:")
     
     # 파일 업로드 섹션 디자인
-    st.subheader('웹툰 속으로에서는 단순한 클릭 한 번으로 당신의 사진을 독특하고 재미있는 웹툰 스타일로 변환해드립니다!:sunglasses:')
-    st.write(':blue[얼굴 사진을 업로드 해주세요! 사진은 저장되지 않습니다!]')
+    st.write('<p class="fonts" style=font-size:30px;>웹툰 속으로에서는 단순한 클릭 한 번으로 당신의 사진을 독특하고 재미있는 웹툰 스타일로 변환해드립니다!</p>',unsafe_allow_html=True)
+    st.write('<p class="fonts" style="font-size:20px; color: blue;">얼굴 사진을 업로드 해주세요! 사진은 저장되지 않습니다!</p>',unsafe_allow_html=True)
     # 파일 업로드 컴포넌트
     uploaded_file = st.file_uploader("PNG 또는 JPG 이미지를 업로드하세요.", type=["png", "jpg", "jpeg"])
     print("uploaded!")
