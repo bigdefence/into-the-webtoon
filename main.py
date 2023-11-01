@@ -84,7 +84,6 @@ def main():
         image = Image.open(uploaded_file).convert("RGB")
         image = ImageOps.exif_transpose(image)
         out = resize_image(image)
-        st.write(out.size)
         # with torch.no_grad():
         #     image = to_tensor(image).unsqueeze(0) * 2 - 1
         #     out = net(image.to(device), False).cpu()
